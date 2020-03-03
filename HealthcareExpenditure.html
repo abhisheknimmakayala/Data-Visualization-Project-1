@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    <title> Healthcare Expenditure</title>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawAllSheets);
+
+
+        function drawAllSheets(){
+            
+            drawSheetName('Healthcare','SELECT A,M,R',
+            PerPersn2012ResponseHandler);
+
+            drawSheetName('Healthcare','SELECT A,N,S',
+            PerPersn2013ResponseHandler);
+
+            drawSheetName('Healthcare','SELECT A,O,T',
+            PerPersn2014ResponseHandler);
+
+            drawSheetName('Healthcare','SELECT A,P,U',
+            PerPersn2015ResponseHandler);
+
+            drawSheetName('Healthcare','SELECT A,Q,V',
+            PerPersn2016ResponseHandler);
+
+            drawSheetName('Healthcare','SELECT A,W,X,Y,Z',
+            growthfxdvalueResponseHandler);
+            
+            drawSheetName('Healthcare','SELECT A,AA,AB,AC,AD',
+            growthperResponseHandler);
+            
+            
+
+            
+
+        
+
+        }//drawAllSheets
+
+
+        function drawSheetName(sheetName,query,responseHandler){
+            var queryString = encodeURIComponent(query);
+            var query = new google.visualization.Query(
+                "https://docs.google.com/spreadsheets/d/1kVUs3vF3NfT-UzoIflGZ6mj6NT1btfHye4JGGYa7sV4/gviz/tq?sheet="+sheetName+"&headers=1&tq="+queryString);
+            query.send(responseHandler);
+        }//drawSheetName
+
+        function PerPersn2012ResponseHandler(response){
+
+            var data = response.getDataTable();
+            data.sort({column:1,desc:true})
+
+
+              /*formating*/
+            var formatter = new google.visualization.NumberFormat({
+                fractionDigits:0,prefix:' $',
+                
+            });
+
+            
+            formatter.format(data,1); 
+            formatter.format(data,2); 
+            
+
+            var options = {
+           legend: 'none',
+           title:'4. Per person GDP vs Per person Healthcare spending 2012',
+           vAxis: {title: 'Amount in dollars', minValue: 0},
+           colors: ['blue','green'],
+           pointShape: 'star',
+           pointSize: 14,
+           animation: {
+           duration: 200,
+           easing: 'inAndOut',
+            }
+            };
+
+          
+            var chart = new google.visualization.ScatterChart(
+                document.getElementById('2012scatter')
+            );
+
+
+            chart.draw(data,options);          
+        }//PerPersn2012ResponseHandler
+
+        function PerPersn2013ResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,prefix:' $',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2); 
+
+
+var options = {
+legend: 'none',
+title:'Per person GDP vs Per person Healthcare spending 2013',
+vAxis: {title: 'Amount in dollars', minValue: 0},
+colors: ['blue','green'],
+pointShape: 'star',
+pointSize: 14,
+animation: {
+duration: 200,
+easing: 'inAndOut',
+}
+};
+
+
+var chart = new google.visualization.ScatterChart(
+    document.getElementById('2013scatter')
+);
+
+
+chart.draw(data,options);          
+}//PerPersn2013ResponseHandler
+
+function PerPersn2014ResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,prefix:' $',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2); 
+
+
+var options = {
+legend: 'none',
+title:'Per person GDP vs Per person Healthcare spending 2014',
+vAxis: {title: 'Amount in dollars', minValue: 0},
+colors: ['blue','green'],
+pointShape: 'star',
+pointSize: 14,
+animation: {
+duration: 200,
+easing: 'inAndOut',
+}
+};
+
+
+var chart = new google.visualization.ScatterChart(
+    document.getElementById('2014scatter')
+);
+
+
+chart.draw(data,options);          
+}//PerPersn2014ResponseHandler
+
+function PerPersn2015ResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,prefix:' $',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2); 
+
+
+var options = {
+legend: 'none',
+title:'Per person GDP vs Per person Healthcare spending 2015',
+vAxis: {title: 'Amount in dollars', minValue: 0},
+colors: ['blue','green'],
+pointShape: 'star',
+pointSize: 14,
+animation: {
+duration: 200,
+easing: 'inAndOut',
+}
+};
+
+
+var chart = new google.visualization.ScatterChart(
+    document.getElementById('2015scatter')
+);
+
+
+chart.draw(data,options);          
+}//PerPersn2015ResponseHandler
+
+function PerPersn2016ResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,prefix:' $',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2); 
+
+
+var options = {
+legend: 'none',
+title:'Per person GDP vs Per person Healthcare spending 2016',
+vAxis: {title: 'Amount in dollars', minValue: 0},
+colors: ['blue','green'],
+pointShape: 'star',
+pointSize: 14,
+animation: {
+duration: 200,
+easing: 'inAndOut',
+}
+};
+
+
+var chart = new google.visualization.ScatterChart(
+    document.getElementById('2016scatter')
+);
+
+
+chart.draw(data,options);          
+}//PerPersn2016ResponseHandler
+
+function growthfxdvalueResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,prefix:' $',suffix:' Billion',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2);
+formatter.format(data,3); 
+formatter.format(data,4); 
+
+var options={
+height:400,
+isStacked:true,
+legend : 'none',
+colors : ['green','orange','gold','red'],
+bars: 'vertical',
+vAxis: {title:'Country'},
+hAxis : {title:'$ Amount in Billions'},
+title : '6. Fastest growing countries- Fixed value'
+}
+
+var chart = new google.visualization.BarChart(
+    document.getElementById('fixedvalue')
+);
+
+
+chart.draw(data,options);          
+}//growthfxdvalueResponseHandler
+
+function growthperResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,suffix:' %',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2); 
+formatter.format(data,3); 
+formatter.format(data,4); 
+
+var options={
+height:400,
+isStacked:true,
+legend : 'none',
+colors : ['green','orange','gold','red'],
+bars: 'vertical',
+vAxis: {title:'Country'},
+hAxis : {title:'Percentage Change'},
+title : 'Fastest growing countries- Percentage Change'
+}
+
+var chart = new google.visualization.BarChart(
+    document.getElementById('fixedper')
+);
+
+
+chart.draw(data,options);          
+}//growthperResponseHandler
+    
+    
+                
+    </script>
+
+</head>
+<body>
+   <div id="main">
+        <div id="header">
+            <div id = "logo">
+                <div id = "logo_text">
+                    <h1><a> <span class="logo_color"></span></a></h1>
+                    <h2></h2>
+
+                </div><!--logo_text-->
+
+            </div><!--logo-->
+
+            <div id="menubar">
+                <ul id="menu">
+                    
+                        <li><a href ="index.html">Home</a></li>
+                        <li><a href ="EducationExpenditure.html" >Education Expenditure</a></li>
+                        <li class="selected"><a href="HealthcareExpenditure.html">Healthcare Expenditure</a></li>
+                        <li><a href = "MilitaryExpenditure.html">Military Expenditure</a></li>
+                        <!--
+                        <li><a href = "contact.html">Contact</a></li>
+                        <li><a href = "sandbox.html">Sandbox</a></li>
+
+                        -->
+                        
+                    
+                </ul><!--menu-->
+
+            </div><!--menubar-->
+
+        </div><!--header-->
+        
+        <div id = "site_content">
+           <span>This tab contains the trends of Healthcare expenditure for the 10 countries from the year 2012 to 2016</span>
+           <div id='2012scatter'></div>
+           <div id='2013scatter'></div>
+           <div id='2014scatter'></div>
+           <div id='2015scatter'></div>
+           <div id='2016scatter'></div>
+           <div id='fixedvalue'></div>
+           <div id='fixedper'></div>
+
+
+        </div><!--site_content-->
+
+        <div id ="footer">
+            Copyright &copy; 
+            <script>
+                var d = new Date();
+                document.write(d.getFullYear());
+            </script>
+            | <a href="#">| Abhishek Nimmakayala</a>
+
+        </div><!--footer-->
+   </div><!-- main-->
+   
+</body>
+</html>
+
+
+
+

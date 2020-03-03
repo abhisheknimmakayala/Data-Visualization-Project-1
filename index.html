@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    <title> G20-Home</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawAllSheets);
+
+
+        function drawAllSheets(){
+            
+            drawSheetName('Healthcare','SELECT A',
+            worldmapResopnseHandler);
+
+            drawSheetName('GDP','SELECT A,G,H',
+            ExpenditurevsGDPResponseHandler);
+
+            drawSheetName('GDP','SELECT A,I,J,K',
+            ExpCompareResponseHandler);
+
+    
+
+
+        }//drawAllSheets
+
+
+        function drawSheetName(sheetName,query,responseHandler){
+            var queryString = encodeURIComponent(query);
+            var query = new google.visualization.Query(
+                
+                "https://docs.google.com/spreadsheets/d/1kVUs3vF3NfT-UzoIflGZ6mj6NT1btfHye4JGGYa7sV4/gviz/tq?sheet="+sheetName+"&headers=1&tq="+queryString);
+            query.send(responseHandler);
+        }//drawSheetName
+
+        
+
+        function worldmapResopnseHandler(response){
+
+            var data = response.getDataTable();
+
+            var chart = new google.visualization.GeoChart(
+                document.getElementById("worldmap_div")
+            );
+
+
+            
+
+            var options={
+                height:400,
+                legend:'none'
+
+            }
+
+            chart.draw(data,options)
+
+        }//worldmapResopnseHandle
+
+        function ExpenditurevsGDPResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,suffix:' Billion'
+});
+
+var formatter2 = new google.visualization.NumberFormat({
+    fractionDigits:0,suffix:' Billion'
+});
+formatter.format(data,1); 
+formatter.format(data,2); 
+
+var options={
+    height:400,
+    legend : 'none',
+    colors : ['green','orange'],
+    bars: 'vertical',
+    vAxis: {title:'Country'},
+    hAxis : {title:'$ Amount in Billions'},
+    title : '1. Comparing the expenditure of all the 3 sectors combined with the GDP'
+    }
+
+var chart = new google.visualization.BarChart(
+    document.getElementById('ExpvsGDP')
+);
+
+
+chart.draw(data,options);          
+}//ExpenditurevsGDPResponseHandler
+
+
+function ExpCompareResponseHandler(response){
+
+var data = response.getDataTable();
+data.sort({column:1,desc:true})
+
+
+  /*formating*/
+var formatter = new google.visualization.NumberFormat({
+    fractionDigits:0,suffix:' Billion',
+    
+});
+
+
+formatter.format(data,1); 
+formatter.format(data,2); 
+formatter.format(data,3); 
+
+
+var options={
+height:400,
+isStacked:true,
+legend : 'none',
+colors : ['green','orange','blue'],
+bars: 'vertical',
+vAxis: {title:'Country'},
+hAxis : {title:'$ Amount in Billions'},
+title : '2. Expenditure comparision of each sector'
+}
+
+var chart = new google.visualization.BarChart(
+    document.getElementById('ExpComparision')
+);
+
+
+chart.draw(data,options);          
+}//ExpCompareResponseHandler
+                
+    </script>
+    
+    
+
+    
+</head>
+<body>
+   <div id="main">
+        <div id="header">
+            <div id = "logo">
+                <div id = "logo_text">
+                    <h1><a> <span class="logo_color"></span></a></h1>
+                    <h2></h2>
+
+                </div><!--logo_text-->
+
+            </div><!--logo-->
+
+            <div id="menubar">
+                <ul id="menu">
+                    
+                        <li class="selected"><a href ="index.html">Home</a></li>
+                        <li><a href ="EducationExpenditure.html" >Education Expenditure</a></li>
+                        <li><a href="HealthcareExpenditure.html">Healthcare Expenditure</a></li>
+                        <li><a href = "MilitaryExpenditure.html">Military Expenditure</a></li>
+                        <!--
+                        <li><a href = "contact.html">Contact</a></li>
+                        <li><a href = "sandbox.html">Sandbox</a></li>
+
+                        -->
+                        
+                    
+                </ul><!--menu-->
+
+            </div><!--menubar-->
+
+        </div><!--header-->
+       <br/>
+
+    
+        <div id = "site_content"  >
+           
+           <div class='main_text'>
+            <span>This project describes the spendings of the G20 countries in the 3 sectors viz. Education, Healthcare & Military. The data is obtained from worldbank.com. The data presented is for 5 years from 2012 to 2016, and the countries for which the data is being presented are Australia, Canada, China, Germany, United Kingdom, India, Japan, Mexico, Russia, United States & South Africa. </span>
+            <br/>
+            <br/>
+            <div id='worldmap_div'></div>
+           </div>
+
+        </div><!--site_content-->
+        <div id='ExpvsGDP'></div>
+        <div id='ExpComparision'></div>
+
+        <div id ="footer">
+            Copyright &copy; 
+            <script>
+                var d = new Date();
+                document.write(d.getFullYear());
+            </script>
+            | <a href="#">| Abhishek Nimmakayala</a>
+
+        </div><!--footer-->
+   </div><!-- main-->
+   
+</body>
+</html>
+
+
+
+
